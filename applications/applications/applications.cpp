@@ -6,18 +6,21 @@ class User
 	string name;
 	string surname;
 	int age;
+	long id;
 public:
 	User()
 	{
 		this->name = "Alisa";
 		this->surname = "Shevchuk";
 		this->age = 19;
+		this->id = 0;
 	}
 	User(string name,string surname,int age)
 	{
 		this->name = name;
 		this->surname = surname;
 		this->age = age;
+		this->id = 0;
 	}
 	friend ostream& operator<<(ostream& out, const User& user)
 	{
@@ -50,6 +53,15 @@ public:
 	{
 		return this->age;
 	}
+
+	void setId(long id)
+	{
+		this->id = id;
+	}
+	long getId()
+	{
+		return this->id;
+	}
 };
 class Users
 {
@@ -67,15 +79,13 @@ public:
 	}
 	void Add(User*&user)
 	{
-			/*user = (User*)realloc(user, (this->size + 1) * sizeof(User));
-			user[this->size] = User();
-			this->size++;*/
+		user->setId(this->size + 1);
 		User* tmp = new User[this->size + 1];
 		for (int i = 0; i < this->size; i++)
 		{
-			tmp[i] = arr[i];//почему arr[i], если user[i] должно быть?
+			tmp[i] = arr[i];
 		}
-		tmp[this->size] = User(user->getName(),user->getSurname(),user->getAge());
+		tmp[this->size] = *user;//User(user->getName(),user->getSurname(),user->getAge(),user->getId());
 		delete[]arr;
 		arr = tmp;
 		this->size++;
@@ -89,7 +99,7 @@ public:
 			fprintf(pf, "%i\n", this->size);
 			for (int i = 0; i < this->size; i++)
 			{
-				fprintf(pf, "%s\t%s\t%i\n", this->arr[i].getName().c_str(),this->arr[i].getSurname().c_str(),this->arr[i].getAge());
+				fprintf(pf, "%s\t%s\t%i\t%i\n", this->arr[i].getName().c_str(),this->arr[i].getSurname().c_str(),this->arr[i].getAge(),this->arr[i].getId());
 			}
 			fclose(pf);
 			cout << "Информация записана в файл!\n";
@@ -103,7 +113,6 @@ public:
 int main()
 {
 	setlocale(0, "");
-	//User* user = (User*)malloc(size * sizeof(User));
 	User* user = new User();
 	Users users;
 	int ch;
