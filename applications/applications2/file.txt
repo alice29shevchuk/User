@@ -1,2 +1,2 @@
-Kiril	Levko	19	1
 Alisa	Shevchuk	20	2
+		20	2

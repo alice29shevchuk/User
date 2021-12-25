@@ -85,7 +85,7 @@ public:
 		{
 			tmp[i] = arr[i];
 		}
-		tmp[this->size] = *user;//User(user->getName(),user->getSurname(),user->getAge(),user->getId());
+		tmp[this->size] = *user;
 		delete[]arr;
 		arr = tmp;
 		this->size++;
@@ -96,7 +96,7 @@ public:
 		fopen_s(&pf, "file.txt", "wt");
 		if (pf != nullptr)
 		{
-			fprintf(pf, "%i\n", this->size);
+			//fprintf(pf, "%i\n", this->size);
 			for (int i = 0; i < this->size; i++)
 			{
 				fprintf(pf, "%s\t%s\t%i\t%i\n", this->arr[i].getName().c_str(),this->arr[i].getSurname().c_str(),this->arr[i].getAge(),this->arr[i].getId());
