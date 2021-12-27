@@ -25,7 +25,7 @@ public:
 	}
 	friend ostream& operator<<(ostream& out, const User& user)
 	{
-		out << "Имя: " << user.name << "\nФамилия: " << user.surname << "\nВозраст: " << user.age;
+		out << "Имя: " << user.name << "\nФамилия: " << user.surname << "\nВозраст: " << user.age<<"\n";
 		return out;
 	}
 	void setName(string name)
@@ -172,6 +172,7 @@ public:
 		else
 		{
 			cout << "Нет пользователя с такими данными!\n";
+			cin.ignore();
 		}
 	}
 	void RemoveId()
@@ -202,11 +203,11 @@ public:
 	void Save()
 	{
 		FILE* pf;
-		fopen_s(&pf, "file.txt", "wt");
+		fopen_s(&pf, "C:\\Users\\Admin\\source\\repos\\User\\applications\\applications\\file.txt", "wt");
 		if (pf != nullptr)
 		{
 			//fprintf(pf, "%i\n", this->size);
-			for (int i = 0; i < this->size; i++)
+			for (int i = 0; i < this->size-1; i++)
 			{
 				fprintf(pf, "%s\t%s\t%i\t%i\n", this->arr[i].getName().c_str(), this->arr[i].getSurname().c_str(), this->arr[i].getAge(), this->arr[i].getId());
 			}
@@ -220,11 +221,11 @@ public:
 	}
 	void Print()
 	{
-		if (this->size != 0)
+		if (this->size-1 != 0)
 		{
 			for (int i = 0; i < this->size - 1; i++)
 			{
-				cout << "\n\nИмя: " << arr[i].getName() << "\nФамилия: " << arr[i].getSurname() << "\nВозраст: " << arr[i].getAge() << "\nАйди: " << arr[i].getId() << "\n";
+				cout << "Имя: " << arr[i].getName() << "\nФамилия: " << arr[i].getSurname() << "\nВозраст: " << arr[i].getAge() << "\nАйди: " << arr[i].getId() << "\n\n";
 			}
 		}
 		else
@@ -232,7 +233,7 @@ public:
 			cout << "Каталог пуст!\n";
 		}
 	}
-	User getbyID()
+	void getbyID()
 	{
 		long id;
 		cout << "Введите айди пользователя: ";
@@ -243,7 +244,7 @@ public:
 			if (id == arr[i].getId())
 			{
 				f = 1;
-				return arr[i];
+				cout<<arr[i];
 			}
 		}
 		if (f == 0)
@@ -295,8 +296,7 @@ int main()
 			break;
 		case 4:
 			system("cls");
-			cout << users.getbyID();
-			cout << "\n";
+			users.getbyID();
 			system("pause");
 			system("cls");
 			break;
